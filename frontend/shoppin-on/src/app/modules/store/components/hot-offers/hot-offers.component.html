@@ -1,0 +1,16 @@
+<app-product-details
+  (close)="onCLose()"
+  *ngIf="selected"
+  [product]="selected"
+></app-product-details>
+<app-snackbar *ngIf="message.length !== 0" [message]="message"></app-snackbar>
+
+<div class="container">
+  <div class="products">
+    <ng-container *ngFor="let product of products">
+      <div class="product" (click)="selectProduct(product)">
+        <app-product [product]="product"></app-product>
+      </div>
+    </ng-container>
+  </div>
+</div>

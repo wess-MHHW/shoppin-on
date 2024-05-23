@@ -1,0 +1,63 @@
+.container {
+  background-color: var(--clr-pink);
+  display: flex;
+  flex-direction: column;
+}
+
+.infos {
+  display: flex;
+  gap: 3rem;
+  padding: 1rem;
+}
+
+ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+li {
+  display: flex;
+  gap: 1rem;
+}
+
+.icon {
+  width: 1rem;
+  aspect-ratio: 1;
+  display: flex;
+  align-items: center;
+}
+
+.infos > div {
+  flex: 1;
+  min-width: 10rem;
+}
+
+.color,
+li {
+  color: #4c4c4cfb;
+  line-height: 1.6;
+  cursor: pointer;
+}
+
+h2 {
+  color: white;
+  text-transform: capitalize;
+  padding-bottom: 0.1rem;
+  margin-bottom: 1rem;
+  border-bottom: 2px solid white;
+  width: max-content;
+}
+
+.createBy {
+  background-color: rgba(0, 0, 0, 0.3);
+  padding: 1rem;
+  text-align: center;
+  color: white;
+  font-size: 1.5rem;
+}
+
+.createBy span {
+  font-weight: 900;
+}

@@ -1,0 +1,61 @@
+<div class="container">
+  <div class="header">
+    <h1 class="header-title">
+      {{ role }}
+    </h1>
+    <div (click)="closeDialog()" class="icon-container">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512">
+        <path
+          d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z"
+        />
+      </svg>
+    </div>
+  </div>
+  <form (submit)="submitForm(form)" #form="ngForm" class="column gap-half">
+    <div
+      [ngClass]="{
+        file: true,
+        column: true,
+        wrong: submit && form.controls['name'].errors
+      }"
+    >
+      <label for="name">name:</label>
+      <input
+        type="text"
+        [value]="category?.name ?? ''"
+        required
+        [ngModel]="category?.name ?? ''"
+        name="name"
+        id="name"
+        [placeholder]="category?.name ?? ''"
+      />
+
+      <p class="error" *ngIf="submit && form.controls['name'].errors">
+        Name is required!
+      </p>
+    </div>
+    <div
+      [ngClass]="{
+        file: true,
+        column: true,
+        wrong: submit && form.controls['file'].errors
+      }"
+    >
+      <label for="file">Photo:</label>
+      <input
+        type="file"
+        id="file"
+        accept="image/*"
+        [required]="category === null"
+        ngModel
+        id="file"
+        name="file"
+        (change)="onFile($event)"
+      />
+      <p class="error" *ngIf="submit && form.controls['file'].errors">
+        Photo is required!
+      </p>
+    </div>
+    <button type="submit">Submit</button>
+  </form>
+</div>

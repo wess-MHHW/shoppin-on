@@ -1,0 +1,150 @@
+<app-loading-indicator *ngIf="loading"></app-loading-indicator>
+
+<app-snackbar *ngIf="message.length !== 0" [message]="message"></app-snackbar>
+
+<p *ngIf="cart.length === 0" class="content">{{ content }}</p>
+<div class="container" *ngIf="cart.length !== 0">
+  <div class="details">
+    <h2>Details</h2>
+    <form #personal="ngForm">
+      <div class="name">
+        <label for="name">Full name:</label>
+        <input type="text" id="name" ngModel name="name" required />
+      </div>
+      <div class="email">
+        <label for="email">Email:</label>
+        <input type="email" id="email" ngModel name="email" />
+      </div>
+      <div class="phone">
+        <label for="phone">Phone:</label>
+        <input type="number" id="phone" ngModel name="phone" required />
+      </div>
+      <div class="address">
+        <label for="address">Address:</label>
+        <input type="text" id="address" ngModel name="address" required />
+      </div>
+    </form>
+  </div>
+  <div class="order">
+    <h2>Order</h2>
+    <div class="products">
+      <ng-container *ngFor="let item of cart">
+        <div class="product">
+          <div class="photo-wrapper">
+            <img
+              [src]="'http://localhost:3000/' + item.product.photos[0]"
+              [alt]="item.product.name + 'photo'"
+            />
+          </div>
+          <div class="product-info">
+            <p>{{ item.product.name }}</p>
+            <div>
+              <p>
+                Quantity: <span>{{ item.quantity }}</span>
+              </p>
+              <p>
+                {{
+                  item.product.price *
+                    (1 - item.product.discount) *
+                    item.quantity
+                }}TND
+              </p>
+            </div>
+          </div>
+        </div>
+      </ng-container>
+    </div>
+    <p class="total-price">
+      Total: <span>{{ caclculateTotal() }}TND</span>
+    </p>
+    <p class="delivery-price">Delivery fees: <span>7TND</span></p>
+    <p class="total-price">
+      Total: <span>{{ caclculateTotal() + fees }}TND</span>
+    </p>
+    <div class="apply-code">
+      <p>Apply Discount Code:</p>
+      <div>
+        <div class="code">
+          <input type="text" id="code" name="code" #input />
+          <button (click)="validateCoupon(input)">Apply discount</button>
+        </div>
+        <p *ngIf="show" class="code-error">Code has expired!</p>
+      </div>
+    </div>
+    <button class="send" (click)="createOrder()">Send Order</button>
+    <p class="g-error" *ngIf="personal.invalid">
+      Please fill in your information!
+    </p>
+    <p class="g-error" *ngIf="message.length !== 0">
+      {{ message }}
+    </p>
+    <button *ngIf="message.length !== 0" class="adjust" (click)="adjustOrder()">
+      Would you like to adjust your order?
+    </button>
+  </div>
+  <div class="recap">
+    <h2>Recap</h2>
+    <div>
+      <p>
+        Client:
+        <span>{{
+          personal.value["name"] == "" ? "--" : personal.value["name"]
+        }}</span>
+      </p>
+      <p>
+        Email:
+        <span>{{
+          personal.value["email"] == "" ? "--" : personal.value["email"]
+        }}</span>
+      </p>
+      <p>
+        phone:
+        <span>
+          {{
+            personal.value["phone"] === ""
+              ? "--"
+              : "(+216) " + personal.value["phone"]
+          }}</span
+        >
+      </p>
+      <p>
+        Address:
+        <span>{{
+          personal.value["address"] === "" ? "--" : personal.value["address"]
+        }}</span>
+      </p>
+      <div>
+        <p>Products:</p>
+        <ng-container *ngFor="let item of cart">
+          <p>
+            {{ item.product.name.toUpperCase() }}
+            <span class="quantity">{{ "x" + item.quantity }}</span>
+          </p>
+        </ng-container>
+      </div>
+      <p>
+        Total: <span class="total">{{ caclculateTotal().toFixed(2) }}TND</span>
+      </p>
+      <p>Payment mode: <span>Cash on delivery</span></p>
+      <p>
+        Delivery fees: <span class="delivery-fees">{{ fees }}TND</span>
+      </p>
+      <p *ngIf="code">
+        Total:
+        <span class="total">{{
+          (caclculateTotal() + fees).toFixed(2) + "TND"
+        }}</span>
+      </p>
+      <p *ngIf="code">
+        Code: <span>{{ code.name }}</span> /
+        <span>{{ (code.value * 100).toFixed(2) }}%</span>
+      </p>
+      <p>
+        Final:
+        <span class="final">{{
+          (caclculateTotal(code) + fees).toFixed(2) + "TND"
+        }}</span>
+      </p>
+    </div>
+  </div>
+</div>

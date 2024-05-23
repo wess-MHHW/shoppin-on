@@ -1,0 +1,7 @@
+.cotnainer {
+  min-height: 100vh;
+}
+
+.wrapper {
+  flex: 1;
+}

@@ -1,0 +1,152 @@
+<app-loading-indicator *ngIf="loading"></app-loading-indicator>
+
+<div class="container">
+  <app-snackbar *ngIf="message.length !== 0" [message]="message"></app-snackbar>
+  <h1>Orders</h1>
+  <div class="stats">
+    <button
+      class="all"
+      [ngClass]="{ selected: selected === 'All' }"
+      (click)="onChange('All')"
+    >
+      All ({{
+        stats.processing +
+          stats.confirmed +
+          stats.shipped +
+          stats.delivered +
+          stats.cancelled
+      }})
+    </button>
+    <button
+      class="processing"
+      [ngClass]="{ selected: selected === 'Processing' }"
+      (click)="onChange('Processing')"
+    >
+      Processing ({{ stats.processing }})
+    </button>
+    <button
+      class="confirmed"
+      [ngClass]="{ selected: selected === 'Confirmed' }"
+      (click)="onChange('Confirmed')"
+    >
+      Confirmed ({{ stats.confirmed }})
+    </button>
+    <button
+      class="shipped"
+      [ngClass]="{ selected: selected === 'Shipped' }"
+      (click)="onChange('Shipped')"
+    >
+      Shipped ({{ stats.shipped }})
+    </button>
+    <button
+      class="delivered"
+      [ngClass]="{ selected: selected === 'Delivered' }"
+      (click)="onChange('Delivered')"
+    >
+      Delivered ({{ stats.delivered }})
+    </button>
+    <button
+      class="cancelled"
+      [ngClass]="{ selected: selected === 'Cancelled' }"
+      (click)="onChange('Cancelled')"
+    >
+      Cancelled ({{ stats.cancelled }})
+    </button>
+  </div>
+  <p *ngIf="orders.length === 0" class="empty">
+    Your order list is currently empty.
+  </p>
+  <div *ngIf="orders.length !== 0" class="orders">
+    <ng-container *ngFor="let order of orders">
+      <div class="order">
+        <div class="customer">
+          <h2>Customer</h2>
+          <p>
+            <span class="label">Name:</span> <span>{{ order.name }}</span>
+          </p>
+          <p *ngIf="order.email">
+            <span class="label">Email:</span> <span>{{ order.email }}</span>
+          </p>
+          <p>
+            <span class="label">Phone: </span><span>{{ order.phone }}</span>
+          </p>
+          <p>
+            <span class="label">Address: </span><span>{{ order.address }}</span>
+          </p>
+          <p>
+            <span class="label">Total:</span>
+            <span>{{ caclculateTotal(order).toFixed(2) }}TND</span>
+          </p>
+        </div>
+        <div class="products">
+          <h2>Products</h2>
+          <ng-container *ngFor="let item of order.products">
+            <div class="product">
+              <p>
+                {{ item.product.name }} <span>x{{ item.quantity }}</span>
+              </p>
+            </div>
+          </ng-container>
+        </div>
+        <div class="created">
+          <h2>Created At</h2>
+          <p>{{ order.createdAt | date : "EEEE, MMMM d, y" }}</p>
+        </div>
+        <div class="state">
+          <h2>State</h2>
+          <p
+            [ngClass]="{
+            processing:order.status ==='Processing',
+            confirmed:order.status ==='Confirmed',
+            shipped:order.status ==='Shipped',
+            delivered:order.status ==='Delivered',
+            cancelled:order.status ==='Cancelled',
+
+          }"
+          >
+            {{ order.status }}
+          </p>
+          <div class="icons" *ngIf="order.status !== 'Cancelled'">
+            <div
+              (click)="goPreviousState(order)"
+              *ngIf="order.status !== 'Processing'"
+              class="icon back"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                <path
+                  fill="#fb9898"
+                  d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.2 288 416 288c17.7 0 32-14.3 32-32s-14.3-32-32-32l-306.7 0L214.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"
+                />
+              </svg>
+            </div>
+            <div
+              (click)="goNextState(order)"
+              *ngIf="order.status !== 'Delivered'"
+              class="forward icon"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                <path
+                  fill="#B197FC"
+                  d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z"
+                />
+              </svg>
+            </div>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+  </div>
+  <div *ngIf="orders.length !== 0" class="pages">
+    <button class="page" (click)="goPreviousPage()">Previous</button>
+    <ng-container *ngFor="let i of length">
+      <div
+        (click)="setPage(i)"
+        [ngClass]="{ selected: page === i }"
+        class="page"
+      >
+        {{ i }}
+      </div>
+    </ng-container>
+    <button class="page" (click)="goNextPage()">Next</button>
+  </div>
+</div>

@@ -1,0 +1,19 @@
+<div class="product">
+  <div class="product-image-wrapper">
+    <img
+      [src]="'http://localhost:3000/' + product.photos[0]"
+      [alt]="product.name + 'photo'"
+    />
+  </div>
+  <p class="name">{{ product.name }}</p>
+  <p class="price-after-discount" *ngIf="product.discount !== 0">
+    {{ (product.price * (1 - product.discount)).toFixed(2) }}TND
+  </p>
+  <p class="price" [ngClass]="{ underline: product.discount !== 0 }">
+    {{ product.price }}TND
+  </p>
+
+  <p class="discount" *ngIf="product.discount !== 0">
+    {{ product.discount * 100 }}%
+  </p>
+</div>

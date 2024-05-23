@@ -1,0 +1,63 @@
+<app-product-details
+  (close)="onCLose()"
+  *ngIf="selected"
+  [product]="selected"
+></app-product-details>
+
+<div class="input-container" #item>
+  <input
+    [(ngModel)]="search"
+    (ngModelChange)="onChange($event)"
+    type="text"
+    placeholder="Enter your porudt name..."
+  />
+  <div class="icon-container">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+      <path
+        fill="#979797"
+        d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z"
+      />
+    </svg>
+  </div>
+  <div class="content column" *ngIf="search.trim().length !== 0">
+    <p class="title">
+      Search results for: <span>{{ search }}</span>
+    </p>
+    <div *ngIf="loading" class="loading-indicator-container">
+      <div class="loading-indicator"></div>
+    </div>
+    <div class="search-results" *ngIf="!loading">
+      <div *ngIf="products.length === 0">
+        <p class="no">
+          We currently don't have any products matching your search criteria.
+        </p>
+        <p class="no">Check back soon for new arrivals!</p>
+      </div>
+      <div class="products" *ngIf="products.length !== 0">
+        <ng-container *ngFor="let product of products">
+          <div
+            class="product row gap-1 align-center"
+            (click)="selectProduct(product)"
+          >
+            <div class="image-cotnainer">
+              <img
+                [src]="'http://localhost:3000/' + product.photos[0]"
+                alt=""
+              />
+              <p *ngIf="product.discount">{{ product.discount * 100 }}%</p>
+            </div>
+            <div>
+              <p>{{ product.name }}</p>
+              <p *ngIf="product.discount">
+                {{ product.price * (1 - product.discount) }}
+              </p>
+              <p [ngClass]="{ discount: product.discount }">
+                {{ product.price }}
+              </p>
+            </div>
+          </div>
+        </ng-container>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,93 @@
+.container {
+  background-color: white;
+  width: 50vw;
+  min-width: 25rem;
+  padding: 2rem;
+  border-radius: 8px;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.header-title {
+  color: var(--clr-black);
+  text-transform: capitalize;
+  font-size: 1.5rem;
+  letter-spacing: 0.1rem;
+}
+
+.icon-container {
+  width: 1rem;
+  height: 1rem;
+  padding: 0.1rem;
+  display: flex;
+  place-content: center;
+  cursor: pointer;
+}
+
+form {
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+}
+
+label {
+  text-transform: capitalize;
+}
+
+.error {
+  color: red;
+  font-size: 0.9rem;
+}
+
+input[type="text"] {
+  all: unset;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  padding: 0.3rem 0.7rem 0.3rem 0.7rem;
+
+  color: var(--clr-black);
+  border-radius: 8px;
+}
+
+input[type="text"]::placeholder {
+  color: var(--clr-grey);
+}
+
+input[type="text"]:focus {
+  outline: 2px solid rgba(0, 0, 0, 0.7);
+}
+
+.wrong input[type="text"] {
+  border: 1px solid rgba(255, 0, 0, 0.2);
+}
+
+.wrong input[type="text"]:focus {
+  outline: 2px solid rgba(255, 0, 0, 0.7);
+}
+
+button {
+  all: unset;
+  text-align: center;
+  background-color: rgba(255, 130, 144, 0.5);
+
+  border-radius: 8px;
+  cursor: pointer;
+  height: 2rem;
+}
+
+input[type="file"]::file-selector-button {
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  padding: 0.3rem 0.7rem 0.3rem 0.7rem;
+  background-color: white;
+  color: var(--clr-black);
+  border-radius: 8px;
+  margin-right: 1rem;
+  cursor: pointer;
+}
+
+.wrong input[type="file"]::file-selector-button {
+  border: 1px solid rgba(255, 0, 0, 0.2);
+}

@@ -1,0 +1,79 @@
+<app-loading-indicator *ngIf="loading"></app-loading-indicator>
+
+<app-snackbar *ngIf="message.length !== 0" [message]="message"></app-snackbar>
+
+<div class="cotnainer">
+  <div class="header">
+    <p>
+      Want to check on your orders or track their status?<br />
+      Simply enter your phone number to log in and view your order history.
+    </p>
+    <input type="number" name="search" id="search" #search />
+    <button (click)="searchOrders(search)">Search</button>
+  </div>
+  <p *ngIf="searched && orders.length === 0">
+    It looks like we don't have any orders connected to this phone number. Did
+    you use a different number when placing your order?
+  </p>
+  <div *ngIf="orders.length !== 0" class="orders">
+    <ng-container *ngFor="let order of orders">
+      <div class="order">
+        <div class="customer">
+          <h2>Customer</h2>
+          <p>
+            <span class="label">Name:</span> <span>{{ order.name }}</span>
+          </p>
+          <p *ngIf="order.email">
+            <span class="label">Email:</span> <span>{{ order.email }}</span>
+          </p>
+          <p>
+            <span class="label">Phone: </span><span>{{ order.phone }}</span>
+          </p>
+          <p>
+            <span class="label">Address: </span><span>{{ order.address }}</span>
+          </p>
+          <p>
+            <span class="label">Total:</span>
+            <span>{{ caclculateTotal(order).toFixed(2) }}TND</span>
+          </p>
+        </div>
+        <div class="products">
+          <h2>Products</h2>
+          <ng-container *ngFor="let item of order.products">
+            <div class="product">
+              <p>
+                {{ item.product.name }} <span>x{{ item.quantity }}</span>
+              </p>
+            </div>
+          </ng-container>
+        </div>
+        <div class="created">
+          <h2>Created At</h2>
+          <p>{{ order.createdAt | date : "EEEE, MMMM d, y" }}</p>
+        </div>
+        <div class="state">
+          <h2>State</h2>
+          <p
+            [ngClass]="{
+            processing:order.status ==='Processing',
+            confirmed:order.status ==='Confirmed',
+            shipped:order.status ==='Shipped',
+            delivered:order.status ==='Delivered',
+            cancelled:order.status ==='Cancelled',
+
+          }"
+          >
+            {{ order.status }}
+          </p>
+          <button
+            *ngIf="order.status === 'Processing'"
+            class="cancel"
+            (click)="cancelOrder(order)"
+          >
+            Cancel Order
+          </button>
+        </div>
+      </div>
+    </ng-container>
+  </div>
+</div>

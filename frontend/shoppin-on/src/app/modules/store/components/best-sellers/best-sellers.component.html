@@ -1,0 +1,21 @@
+<app-product-details
+  (close)="onCLose()"
+  *ngIf="selected"
+  [product]="selected"
+></app-product-details>
+<app-snackbar *ngIf="message.length !== 0" [message]="message"></app-snackbar>
+
+<div class="container">
+  <p *ngIf="this.products.length === 0">
+    We're just getting started! Explore our amazing products and discover our
+    offers.
+  </p>
+  <div class="products" *ngIf="this.products.length !== 0">
+    <ng-container *ngFor="let item of products">
+      <div class="product" (click)="selectProduct(item.product)">
+        <p class="total">{{ item.totalQuantity }}</p>
+        <app-product [product]="item.product"></app-product>
+      </div>
+    </ng-container>
+  </div>
+</div>

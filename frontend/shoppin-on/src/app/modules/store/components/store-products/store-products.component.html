@@ -1,0 +1,43 @@
+<app-loading-indicator *ngIf="loading"></app-loading-indicator>
+<app-product-details
+  (close)="onCLose()"
+  *ngIf="selected"
+  [product]="selected"
+></app-product-details>
+<div class="container">
+  <app-snackbar *ngIf="message.length !== 0" [message]="message"></app-snackbar>
+
+  <div class="filter">
+    <app-filter
+      [id]="id"
+      [categories]="categories"
+      (query)="onQuery($event)"
+    ></app-filter>
+  </div>
+  <div class="products-container">
+    <p *ngIf="!this.products.length">
+      We couldn't find any products matching your search. We're always adding
+      new products! Check back soon
+    </p>
+    <div class="products" *ngIf="this.products.length">
+      <ng-container *ngFor="let porduct of products">
+        <div class="product" (click)="selectProduct(porduct)">
+          <app-product [product]="porduct"></app-product></div
+      ></ng-container>
+    </div>
+    <div class="row gap-half pages align-center" *ngIf="this.products.length">
+      <div class="button" (click)="decrement()">Previous</div>
+      <ng-container *ngFor="let l of length">
+        <div
+          class="button"
+          (click)="setPage(l)"
+          [ngClass]="{ selected: page === l }"
+        >
+          {{ l }}
+        </div>
+      </ng-container>
+
+      <div class="button" (click)="increment()">Next</div>
+    </div>
+  </div>
+</div>

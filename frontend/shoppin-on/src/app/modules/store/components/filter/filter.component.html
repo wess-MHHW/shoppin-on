@@ -1,0 +1,182 @@
+<form #form="ngForm" (ngSubmit)="onSubmit(form)">
+  <h3>Filter products</h3>
+  <div
+    class="categories"
+    [ngStyle]="{
+      'border-radius': '8px',
+      border: '1px solid #eee',
+    }"
+  >
+    <div
+      class="title"
+      [ngStyle]="{ 'background-color': arrow[0] ? 'white' : '#fcfcfc' }"
+    >
+      <p>Category</p>
+
+      <div class="icon" (click)="rotate(0)" [ngClass]="{ rotate: arrow[0] }">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+          <path
+            d="M201.4 374.6c12.5 12.5 32.8 12.5 45.3 0l160-160c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L224 306.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l160 160z"
+          />
+        </svg>
+      </div>
+    </div>
+    <div class="oop" [ngClass]="{ show: arrow[0] }">
+      <ul>
+        <ng-container *ngFor="let category of categories">
+          <li>
+            <input
+              type="radio"
+              [id]="category.name.toLowerCase()"
+              name="category"
+              [value]="category._id"
+              [ngModel]="id"
+            /><label [for]="category.name.toLowerCase()">{{
+              category.name
+            }}</label>
+          </li>
+        </ng-container>
+        <li></li>
+        <li></li>
+      </ul>
+    </div>
+  </div>
+  <div
+    [ngStyle]="{
+    'border-radius': '8px',
+    border: '1px solid #eee',
+  }"
+  >
+    <div
+      class="title"
+      [ngStyle]="{ 'background-color': arrow[1] ? 'white' : '#fcfcfc' }"
+    >
+      <p>discount</p>
+      <div class="icon" (click)="rotate(1)" [ngClass]="{ rotate: arrow[1] }">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+          <path
+            d="M201.4 374.6c12.5 12.5 32.8 12.5 45.3 0l160-160c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L224 306.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l160 160z"
+          />
+        </svg>
+      </div>
+    </div>
+
+    <div class="oop" [ngClass]="{ show: arrow[1] }">
+      <ul>
+        <li>
+          <input
+            ngModel
+            type="radio"
+            id="discount"
+            name="discount"
+            value="with-discount"
+          /><label for="discount">Discounted Products</label>
+        </li>
+        <li>
+          <input
+            ngModel
+            type="radio"
+            value="no-discount"
+            id="no-discount"
+            name="discount"
+          /><label for="no-discount">No discounted products</label>
+        </li>
+        <li></li>
+        <li></li>
+      </ul>
+    </div>
+  </div>
+  <div
+    class="price-container"
+    [ngStyle]="{
+    'border-radius': '8px',
+    border: '1px solid #eee',
+  }"
+  >
+    <div
+      class="title"
+      [ngStyle]="{ 'background-color': arrow[2] ? 'white' : '#fcfcfc' }"
+    >
+      <p>Price</p>
+      <div class="icon" (click)="rotate(2)" [ngClass]="{ rotate: arrow[2] }">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+          <path
+            d="M201.4 374.6c12.5 12.5 32.8 12.5 45.3 0l160-160c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L224 306.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l160 160z"
+          />
+        </svg>
+      </div>
+    </div>
+    <div class="oop" [ngClass]="{ show: arrow[2] }">
+      <ul>
+        <li>
+          <label for="price-min">min:</label>
+          <input ngModel type="number" id="price-min" name="price-min" />
+        </li>
+        <li>
+          <label for="price-max">max:</label>
+          <input ngModel type="number" id="price-max" name="price-max" />
+        </li>
+        <li></li>
+        <li></li>
+      </ul>
+    </div>
+  </div>
+  <div
+    [ngStyle]="{
+    'border-radius': '8px',
+    border: '1px solid #eee',
+  }"
+  >
+    <div
+      class="title"
+      [ngStyle]="{ 'background-color': arrow[3] ? 'white' : '#fcfcfc' }"
+    >
+      <p>Sort by</p>
+      <div class="icon" (click)="rotate(3)" [ngClass]="{ rotate: arrow[3] }">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+          <path
+            d="M201.4 374.6c12.5 12.5 32.8 12.5 45.3 0l160-160c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L224 306.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l160 160z"
+          />
+        </svg>
+      </div>
+    </div>
+    <div class="oop" [ngClass]="{ show: arrow[3] }">
+      <ul>
+        <li>
+          <div class="row align-center custom">
+            <input ngModel type="checkbox" id="name" name="name" />
+            <div class="check-mark">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                <!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
+                <path
+                  fill="#ffffff"
+                  d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z"
+                />
+              </svg>
+            </div>
+          </div>
+          <label for="name">Name</label>
+        </li>
+        <li>
+          <div class="row align-center custom">
+            <input ngModel type="checkbox" id="price" name="price" />
+            <div class="check-mark">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                <!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
+                <path
+                  fill="#ffffff"
+                  d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z"
+                />
+              </svg>
+            </div>
+          </div>
+          <label for="price">Price</label>
+        </li>
+        <li></li>
+        <li></li>
+      </ul>
+    </div>
+  </div>
+  <button type="submit">Search</button>
+  <button type="button" (click)="reset(form)">Reset</button>
+</form>

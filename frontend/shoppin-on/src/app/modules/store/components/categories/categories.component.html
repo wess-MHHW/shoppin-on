@@ -1,0 +1,14 @@
+<app-snackbar *ngIf="message.length !== 0" [message]="message"></app-snackbar>
+
+<div class="container">
+  <div class="categories">
+    <ng-container *ngFor="let category of categories">
+      <div class="category" (click)="showProducts(category)">
+        <p>{{ category.name }}</p>
+        <img
+          [src]="'http://localhost:3000/' + category.photo"
+          [alt]="category.name + 'photo'"
+        /></div
+    ></ng-container>
+  </div>
+</div>

@@ -1,0 +1,125 @@
+main {
+  padding: 3rem 6rem;
+  align-items: center;
+}
+
+main > div,
+form {
+  padding: 2rem;
+  flex: 0.5;
+}
+
+.title {
+  color: var(--clr-pink);
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+.title span {
+  text-transform: uppercase;
+}
+
+.intro p {
+  line-height: 1.6;
+  margin-bottom: 2rem;
+}
+
+input {
+  all: unset;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  padding: 0.3rem 2rem 0.3rem 0.3rem;
+
+  color: var(--clr-black);
+  border-radius: 8px;
+}
+
+input::placeholder {
+  color: var(--clr-grey);
+}
+
+input:focus {
+  outline: 2px solid rgba(0, 0, 0, 0.7);
+}
+
+.wrong input {
+  border: 1px solid rgba(255, 0, 0, 0.2);
+}
+
+.wrong input:focus {
+  outline: 2px solid rgba(255, 0, 0, 0.7);
+}
+
+button {
+  all: unset;
+  text-align: center;
+  background-color: rgba(255, 130, 144, 0.5);
+
+  border-radius: 8px;
+  cursor: pointer;
+  height: 2rem;
+}
+
+label {
+  text-transform: capitalize;
+}
+
+.error {
+  color: red;
+  font-size: 0.9rem;
+}
+
+.password > div {
+  display: flex;
+  position: relative;
+}
+
+.password > div > input {
+  flex: 1;
+}
+
+.icon {
+  position: absolute;
+  height: 100%;
+  aspect-ratio: 1;
+  padding: 0.5rem;
+  display: flex;
+  top: 0;
+  right: 0;
+  cursor: pointer;
+}
+
+form {
+  position: relative;
+}
+
+.error-message {
+  background-color: rgba(255, 0, 0, 0.7);
+  text-align: center;
+  border-radius: 8px;
+  color: white;
+  position: absolute;
+  top: 0;
+  left: 2rem;
+  transform: translateY(-100%);
+  padding: 1rem;
+  width: calc(100% - 4rem);
+}
+
+.loading {
+  width: 1.1rem;
+  height: 1.1rem;
+
+  margin-inline: auto;
+  border-top: 2px solid black;
+  border-radius: 50%;
+  animation: rotate 1s infinite linear;
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}

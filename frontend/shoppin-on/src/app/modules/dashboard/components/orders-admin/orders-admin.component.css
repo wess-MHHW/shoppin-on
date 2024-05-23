@@ -1,0 +1,297 @@
+app-loading-indicator {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.1);
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+app-snackbar {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+}
+.container {
+  height: 100%;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.stats {
+  display: flex;
+  gap: 1rem;
+}
+
+.empty {
+  text-align: center;
+  padding: 3rem;
+}
+
+/* "Processing" | "Confirmed" | "Shipped" | "Delivered" | "Cancelled";*/
+
+.stats button.all {
+  all: unset;
+  text-align: center;
+  padding: 0.7rem;
+  flex: 0.16;
+  background-color: black;
+  color: white;
+  border: 2px solid black;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.stats button.all.selected {
+  background-color: white;
+  color: black;
+  border-color: black;
+}
+
+.stats button.processing {
+  all: unset;
+  text-align: center;
+  padding: 0.7rem;
+  flex: 0.16;
+  background-color: #ffd166;
+  color: white;
+  border-radius: 8px;
+  cursor: pointer;
+  border: 2px solid #ffd166;
+}
+
+.stats button.processing.selected {
+  background-color: white;
+  color: #ffd166;
+  border-color: #ffd166;
+}
+
+.stats .confirmed {
+  all: unset;
+  text-align: center;
+  padding: 0.7rem;
+  flex: 0.16;
+  background-color: #06d6a0;
+  border: 2px solid #06d6a0;
+
+  color: white;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.stats button.confirmed.selected {
+  background-color: white;
+  color: #06d6a0;
+  border-color: #06d6a0;
+}
+
+.stats .shipped {
+  all: unset;
+  text-align: center;
+  padding: 0.7rem;
+  flex: 0.16;
+  border: 2px solid #118ab2;
+  background-color: #118ab2;
+  color: white;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.stats button.shipped.selected {
+  background-color: white;
+  color: #118ab2;
+  border-color: #118ab2;
+}
+
+.stats .delivered {
+  all: unset;
+  text-align: center;
+  padding: 0.7rem;
+  flex: 0.16;
+  background-color: #073b4c;
+  border: 2px solid #073b4c;
+  color: white;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.stats button.delivered.selected {
+  background-color: white;
+  color: #073b4c;
+  border-color: #073b4c;
+}
+
+.stats .cancelled {
+  all: unset;
+  text-align: center;
+  padding: 0.7rem;
+  flex: 0.16;
+  background-color: #ef476f;
+  border: 2px solid #ef476f;
+
+  color: white;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.stats button.cancelled.selected {
+  background-color: white;
+  color: #ef476f;
+  border-color: #ef476f;
+}
+
+.order .processing {
+  background-color: #ffd166;
+  width: max-content;
+  animation: scale 3s infinite;
+}
+
+.order .confirmed {
+  background-color: #06d6a0;
+  width: max-content;
+  animation: scale 3s infinite;
+}
+
+.order .shipped {
+  background-color: #118ab2;
+  width: max-content;
+  animation: scale 3s infinite;
+}
+
+.order .delivered {
+  background-color: #073b4c;
+  width: max-content;
+  color: white;
+}
+
+.order .cancelled {
+  background-color: #ef476f;
+  width: max-content;
+}
+
+@keyframes scale {
+  0% {
+    transform: scale(0.9);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(0.9);
+  }
+}
+
+.order .customer p {
+  display: flex;
+  align-items: center;
+}
+
+.order .customer .label {
+  display: block;
+  font-size: 0.8rem;
+  width: 8ch;
+}
+
+.order .customer p span:not(.label) {
+  font-weight: 900;
+}
+
+.order h2 {
+  margin-bottom: 1rem;
+}
+
+.orders {
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.order {
+  padding: 1rem;
+  border-radius: 8px;
+  display: flex;
+  gap: 2rem;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.customer {
+  flex: 0.35;
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.products {
+  flex: 0.35;
+}
+
+.created {
+  flex: 0.2;
+}
+
+.state {
+  display: flex;
+  flex-direction: column;
+
+  flex: 0.1;
+}
+
+.icons {
+  margin-top: auto;
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  justify-content: center;
+}
+
+.forward {
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 50%;
+  padding: 0.35rem;
+  border: 1px solid #b197fc;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.back {
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 50%;
+  padding: 0.35rem;
+  border: 1px solid #fb9898;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.pages {
+  display: flex;
+  gap: 0.5rem;
+  align-self: self-end;
+}
+
+.page {
+  all: unset;
+  padding: 0.3em;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+  cursor: pointer;
+  color: var(--clr-grey);
+}
+
+.page.selected {
+  color: white;
+  background-color: var(--clr-pink);
+  border-color: var(--clr-pink);
+}

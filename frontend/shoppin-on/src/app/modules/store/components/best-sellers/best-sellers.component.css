@@ -1,0 +1,53 @@
+app-product-details {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.1);
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 50;
+}
+.container {
+  padding: 1rem;
+}
+.products {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.product {
+  width: 8rem;
+  height: 16rem;
+  position: relative;
+}
+
+app-snackbar {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+}
+
+p {
+  text-align: center;
+}
+
+.total {
+  position: absolute;
+  top: 0;
+  right: 0;
+  display: block;
+  background-color: gold;
+  padding: 0.1em;
+  z-index: 2;
+}
+
+app-snackbar {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+}

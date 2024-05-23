@@ -1,0 +1,163 @@
+app-product-details {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.1);
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 50;
+}
+
+.input-container {
+  position: relative;
+  display: flex;
+}
+
+input {
+  all: unset;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  padding: 0.3rem 2rem 0.3rem 0.3rem;
+  width: 100%;
+  color: var(--clr-black);
+  border-radius: 8px;
+}
+
+input::placeholder {
+  color: var(--clr-grey);
+}
+
+input:focus {
+  outline: 2px solid rgba(0, 0, 0, 0.7);
+}
+
+.icon-container {
+  position: absolute;
+  top: 0;
+  right: 0.2rem;
+  height: 100%;
+  aspect-ratio: 1;
+  padding: 0.4rem;
+  display: flex;
+}
+
+.content {
+  z-index: 15;
+  position: absolute;
+  background-color: white;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  width: 100%;
+  left: 0;
+  bottom: -1rem;
+  transform: translateY(100%);
+  height: 21rem;
+  padding: 1rem;
+  overflow: scroll;
+}
+
+.content .title {
+  font-weight: 500;
+  font-size: 0.8rem;
+}
+
+.title span {
+  font-weight: 900;
+  color: var(--clr-black);
+}
+
+.loading-indicator-container {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.loading-indicator {
+  width: 1rem;
+  height: 1rem;
+  border-top: 1px solid black;
+  border-radius: 50%;
+  animation: rotate 1s infinite linear;
+}
+
+.search-results {
+  margin-top: 1rem;
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.no {
+  color: var(--clr-grey);
+  font-size: 0.9rem;
+  margin-bottom: 0.3rem;
+}
+
+.no:last-of-type {
+  font-weight: 900;
+}
+
+.products {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  height: 100%;
+}
+
+.product {
+  padding: 0.5rem;
+  width: 100%;
+  height: 5rem;
+  border-radius: 8px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+}
+
+.image-cotnainer {
+  width: 4rem;
+  height: 4rem;
+  position: relative;
+}
+
+img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.image-cotnainer > p {
+  position: absolute;
+  top: 0.5rem;
+  left: 0.5rem;
+  width: 1rem;
+  height: 1rem;
+  background-color: red;
+  color: white;
+  font-size: 0.5rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.discount {
+  text-decoration: line-through;
+}
+
+.product:hover {
+  background-color: var(--clr-pink);
+}
+
+.content::-webkit-scrollbar {
+  display: none;
+}

@@ -1,0 +1,32 @@
+.container {
+  padding: 1rem;
+  height: 100vh;
+  background-color: var(--clr-pink);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+
+p {
+  font-weight: 900;
+}
+
+button {
+  all: unset;
+  color: white;
+  background-color: transparent;
+  border: 1px solid white;
+  text-transform: uppercase;
+  padding: 0.7rem 1rem;
+  border-radius: 8px;
+
+  cursor: pointer;
+}
+
+button:hover {
+  color: var(--clr-pink);
+  background-color: white;
+  border: 1px solid transparent;
+}

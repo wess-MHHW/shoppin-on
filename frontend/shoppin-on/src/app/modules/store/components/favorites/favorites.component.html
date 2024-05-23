@@ -1,0 +1,19 @@
+<app-product-details
+  (close)="onCLose()"
+  *ngIf="selected"
+  [product]="selected"
+></app-product-details>
+
+<div class="container">
+  <div *ngIf="this.products.length !== 0" class="btn" (click)="clearAll()">
+    Clear all
+  </div>
+  <p *ngIf="this.products.length === 0">You haven't saved any products yet!</p>
+  <div class="products" *ngIf="this.products.length !== 0">
+    <ng-container *ngFor="let product of products">
+      <div class="product" (click)="selectProduct(product)">
+        <app-product [product]="product"></app-product>
+      </div>
+    </ng-container>
+  </div>
+</div>

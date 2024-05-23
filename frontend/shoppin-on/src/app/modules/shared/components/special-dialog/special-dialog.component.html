@@ -1,0 +1,245 @@
+<div class="container">
+  <div class="header">
+    <h1 class="header-title">
+      {{ role }}
+    </h1>
+    <div (click)="closeDialog()" class="icon-container">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512">
+        <path
+          d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z"
+        />
+      </svg>
+    </div>
+  </div>
+  <form (submit)="submitForm(form)" #form="ngForm" class="column gap-half">
+    <div
+      [ngClass]="{
+        column: true,
+        wrong: submit && form.controls['name'].errors
+      }"
+    >
+      <label for="name">name:</label>
+      <input
+        type="text"
+        [value]="product?.name ?? ''"
+        required
+        [ngModel]="product?.name ?? ''"
+        name="name"
+        id="name"
+        [placeholder]="product?.name ?? ''"
+      />
+
+      <p class="error" *ngIf="submit && form.controls['name'].errors">
+        Name is required!
+      </p>
+    </div>
+
+    <div
+      [ngClass]="{
+        column: true,
+        wrong: submit && form.controls['descirption'].errors
+      }"
+    >
+      <label for="descirption">descirption:</label>
+      <input
+        type="text"
+        [value]="product?.description ?? ''"
+        required
+        [ngModel]="product?.description ?? ''"
+        name="descirption"
+        id="descirption"
+        [placeholder]="product?.descirption ?? ''"
+      />
+
+      <p class="error" *ngIf="submit && form.controls['descirption'].errors">
+        Descirption is required!
+      </p>
+    </div>
+
+    <div class="row gap-1 wrapper">
+      <div
+        [ngClass]="{
+          quantity: true,
+          column: true,
+          wrong: submit && form.controls['quantity'].errors
+        }"
+      >
+        <label for="quantity">quantity:</label>
+        <input
+          type="number"
+          min="0"
+          [value]="product?.quantity ?? ''"
+          required
+          [ngModel]="product?.quantity ?? ''"
+          name="quantity"
+          id="quantity"
+          [placeholder]="product?.quantity ?? ''"
+        />
+
+        <p class="error" *ngIf="submit && form.controls['quantity'].errors">
+          {{
+            form.controls["quantity"].errors["required"]
+              ? "Quantity is required!"
+              : "Quantity must be a positive number!"
+          }}
+        </p>
+      </div>
+
+      <div
+        [ngClass]="{
+          unitPrice: true,
+          column: true,
+          wrong: submit && form.controls['unitPrice'].errors
+        }"
+      >
+        <label for="unitPrice">unit Price:</label>
+        <input
+          type="number"
+          min="0"
+          [value]="product?.unitPrice ?? ''"
+          required
+          [ngModel]="product?.unitPrice ?? ''"
+          name="unitPrice"
+          id="unitPrice"
+          [placeholder]="product?.unitPrice ?? ''"
+        />
+
+        <p class="error" *ngIf="submit && form.controls['unitPrice'].errors">
+          {{
+            form.controls["unitPrice"].errors["required"]
+              ? "Unit Price is required!"
+              : "Unit Price  must be a positive number!"
+          }}
+        </p>
+      </div>
+    </div>
+
+    <div class="row gap-1 wrapper">
+      <div
+        [ngClass]="{
+          price: true,
+          column: true,
+          wrong: submit && form.controls['price'].errors
+        }"
+      >
+        <label for="price">price:</label>
+        <input
+          type="number"
+          min="0"
+          [value]="product?.price ?? ''"
+          required
+          [ngModel]="product?.price ?? ''"
+          name="price"
+          id="price"
+          [placeholder]="product?.price ?? ''"
+        />
+
+        <p class="error" *ngIf="submit && form.controls['price'].errors">
+          {{
+            form.controls["price"].errors["required"]
+              ? "Price is required!"
+              : "Price  must be a positive number!"
+          }}
+        </p>
+      </div>
+
+      <div
+        [ngClass]="{
+          discount: true,
+          column: true,
+          wrong: submit && form.controls['discount'].errors
+        }"
+      >
+        <label for="discount">discount:</label>
+        <input
+          type="number"
+          min="0"
+          max="1"
+          [value]="product?.discount ?? ''"
+          [ngModel]="product?.discount ?? ''"
+          name="discount"
+          id="discount"
+          [placeholder]="product?.discount ?? ''"
+        />
+
+        <p class="error" *ngIf="submit && form.controls['discount'].errors">
+          "Discount must be a number between 0 and 1!"
+        </p>
+      </div>
+    </div>
+
+    <div
+      [ngClass]="{
+        file: true,
+        column: true,
+        wrong: submit && form.controls['category'].errors
+      }"
+    >
+      <label for="category">category:</label>
+      <input
+        type="text"
+        [value]="product?.category?._id ?? ''"
+        [ngModel]="product?.category?._id ?? ''"
+        name="category"
+        id="category"
+        [placeholder]="product?.category ?? ''"
+      />
+
+      <app-drop-down
+        [selected]="selected"
+        (selectedChange)="onChange($event, form)"
+      ></app-drop-down>
+    </div>
+
+    <div *ngIf="product" class="row algin-center gap-half">
+      <ng-container *ngFor="let p of product.photos; let i = index">
+        <div
+          (click)="onclick(i)"
+          class="image-wrapper"
+          [ngClass]="{ deleted: deleted.includes(i) }"
+        >
+          <img [src]="'http://localhost:3000/' + p" alt="" />
+        </div>
+      </ng-container>
+    </div>
+
+    <div
+      [ngClass]="{
+        file: true,
+        column: true,
+        wrong: submit && form.controls['file'].errors
+      }"
+    >
+      <label for="file">Photos:</label>
+      <input
+        type="file"
+        id="file"
+        accept="image/*"
+        [required]="
+          product === null ||
+          (product !== null &&
+            files.length === 0 &&
+            product.photos.length === deleted.length)
+        "
+        ngModel
+        id="file"
+        multiple
+        name="file"
+        (change)="onFile($event)"
+      />
+      <p
+        class="error"
+        *ngIf="
+          (submit && form.controls['file'].errors) ||
+          (submit &&
+            product !== null &&
+            files.length === 0 &&
+            product.photos.length === deleted.length)
+        "
+      >
+        Photos are required!
+      </p>
+    </div>
+    <button type="submit">Submit</button>
+  </form>
+</div>
